@@ -1,0 +1,26 @@
+{
+  "name": "tandem-trivia",
+  "version": "1.0.0",
+  "description": "A trivia game built as part of the challenge for the tandem apprenticeship program",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "postcss css/styles.css -o build/styles.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/K3beros/tandem-trivia.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/K3beros/tandem-trivia/issues"
+  },
+  "homepage": "https://github.com/K3beros/tandem-trivia#readme",
+  "dependencies": {
+    "autoprefixer": "^9.8.6",
+    "postcss-cli": "^8.2.0",
+    "tailwindcss": "^1.9.6"
+  }
+}
