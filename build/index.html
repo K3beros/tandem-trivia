@@ -1,26 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Tandem Trivia</title>
-</head>
-<body>
-   <div class="flex items-center justify-center mt-16">
-       <div class="max-w-screen-lg overflow-hidden shadow-lg flex-auto rounded-lg">
-           <div class="bg-green-800 text-white border shadow-lg  py-6">
-               <p class="flex justify-center font-bold ">Question Number</p>
-           </div>
-           <div id='content'>
-            
-           </div>
-           <div class="flex justify-center">
-               <p>Correct Answer: B</p>
-                <div class="pl-64">Score: </div>
-           </div>
-       </div>
-   </div>
-   <script src="script.js"></script>
-</body>
+  </head>
+  <body>
+    <div class="flex items-center justify-center mt-16">
+      
+      <div
+        class="max-w-screen-lg overflow-hidden shadow-lg flex-auto rounded-lg"
+      >
+        <div
+          class="bg-green-800 text-white border shadow-lg py-6"
+          id="question-number"
+        ></div>
+        <div id="content"></div>
+
+        <div id="options"></div>
+
+        <div>
+          <input
+            type="button"
+            value="Check Answer"
+            class="
+              bg-blue-500
+              hover:bg-blue-700
+              text-white
+              font-bold
+              py-2
+              px-4
+              rounded
+            "
+          />
+        </div>
+
+        <div class="flex justify-center mt-4 mb-4">
+            <input
+              type="button"
+              value="Start"
+              id="start-btn"
+              class="
+                bg-blue-500
+                hover:bg-blue-700
+                text-white
+                font-bold
+                py-2
+                px-4
+                rounded
+              "
+              onclick="initialize()"
+            />
+        </div>
+
+        <div class="flex justify-center mt-4 mb-4" id="btn-id">
+          <input
+            type="button"
+
+            id="btn"
+            value="Next"
+            class="
+              bg-blue-500
+              hover:bg-blue-700
+              text-white
+              font-bold
+              py-2
+              px-4
+              rounded
+            "
+          />
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>

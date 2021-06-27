@@ -1,5 +1,3 @@
-// // const { data } = require("autoprefixer");
-
 
 
 let data = [
@@ -117,61 +115,95 @@ let data = [
 
 
 
-
-
-
-
-//p.innerHTML = data[0].question
-
-// const arr = data.map(element => {
-
-//     return `${element.question}`
-//     // return `
-//     //     <div>
-//     //     <p>${element.question}?</p>
-//     //     </div>
-//     //     <div>
-//     //     <p>${element.incorrect[0]}
-//     //     </div>
-//     //     <div>
-//     //     <p>${element.incorrect[1]}
-//     //     </div>
-//     //     <div>
-//     //     <p>${element.incorrect[2]}
-//     //     </div>
-//     //     <div>
-//     //     <p>${element.incorrect[3]}
-//     //     </div>
-//     // `
-// });
-
-// let singleQuestion = () => {
-//     return p.innerHTML = i.question;
-// }
+let questionNum = document.getElementById('question-number')
+let btn = document.getElementById('btn')
 
 let content = document.getElementById('content')
-
 const div = document.createElement('div')
+
+let answer = document.getElementById('answer-id')
+
+let startBtn = document.getElementById('start-btn')
+
+let selectedValue = document.querySelector('input[name="options"]:checked')
+
+
+
 let p = content.appendChild(div)
-//p.innerHTML = '';
+
+let options = document.getElementById('options')
 
 
-// let clearScreen = (a) => {
-//   p.innerHTML = a
-// }
 
-let interval = null;
-let counter = 0;
+
+//function to show question based on counter
+
+/**
+ * Assign the first question as 0 and display it
+ * Clicking the next button should increase counter by 1 
+ * and run a function to show question + 1
+ */
+
+ let counter = 0;
 
 
 let showQuesion = () => {
+
   if(counter === data.length - 1){
-    clearInterval(interval)
+    console.log('End of questions')
   }
-  p.innerHTML = data[counter].question
-  console.log(p.innerHTML)
-  counter ++
+
+  
+  questionNumber = counter
+  questionNum.innerHTML = `<p class="flex justify-center font-bold" >Question Number ${questionNumber + 1} of ${data.length}</p>`
+  content.innerHTML = ( `
+       <div>
+
+       </div>
+       <div class="ml-2">
+       <p>${data[counter].question}?</p>
+       </div>
+       
+  `)
+   options.innerHTML = '';
+    data[counter].incorrect.forEach(element => {
+    let label = document.createElement('label')
+    label.innerHTML = element + `<br />`
+    let inputValue = document.createElement('input')
+    inputValue.setAttribute('type', 'radio')
+    inputValue.setAttribute('name', 'options')
+    options.appendChild(inputValue)
+    options.appendChild(label)
+  });
+  console.log(options)
+
+  options.addEventListener('click', checkAnswer)
+
+  
+  console.log(counter)
+  counter++
 }
+
+btn.addEventListener('click', showQuesion)
+
+let checkAnswer = (opp) => {
+
+  let userAnswer = document.getElementsByName('options').values
+  console.log(userAnswer)
+  // if(userOption === correctOption) {
+  //   return true
+  // }
+  // return false
+}
+//could loop through options array to display
+
+//selectedValue.addEventListener('click', checkAnswer)
+//write show question function: should have counter variable
+//next question should be nested inside show function
+//current question should be compared with array length
+//counter variable should be increased before end of function
+
+
 
 // 1. Create the interval
 // 2. Create a counter variable
@@ -179,28 +211,36 @@ let showQuesion = () => {
 // 4. Stop the interval when we've show all items
 
 function initialize () {
-  interval = setInterval(showQuesion, 3000)
+  // startBtn.click()
+  //startBtn.onclick = (e) => {
+    //e.currentTarget.remove()
+    showQuesion()
+    //btn.addEventListener('click', nextButton())
+    //console.log(e)
+  
+
+  //showQuestions()
+
 }
 
-initialize()
+
+
+// let btnClick = (e) => {
+//   //e.currentTarget.remove()
+//   alert('btn clicked')
+//   console.log('clicked')
+//   console.log(e.currentTarget)
+// }
 
 
 
 
 
 
-// //show options that are shuffled
-// const shuffleOptions = (ans) => {
-//     const res = ans.map((element) => {
-//       element.incorrect.push(element.correct)
-//       result = shuffleArray(element.incorrect)
-//       //console.log(result)
-//       return result
-//     })
-//     return res;
-//   }
 
 
+
+//shuffle all elements in array
 // const shuffleArray = (arr) => {
 //     for (let i = arr.length-1; i >= 0; i--) {
 //         let randomIndex = Math.floor(Math.random() * (i + 1))
@@ -208,13 +248,18 @@ initialize()
 
 //         arr[randomIndex] = arr[i]
 //         arr[i] = valueAtIndex
+//         arr[i].incorrect = arr[i].incorrect.concat(arr[i].correct)
+//         //console.log(arr[i].question)
+//         for(let j = 0; j<arr[i].incorrect.length; j++) {
+//             //console.log(arr[i].incorrect)
+        
+//         }
 //     }
-//     return data
+//     return arr
 // }
 
+//shuffleArray(data);
+initialize()
 
 
 
-
-// //shuffle array
-// //after shuffling return question index value and splice out question from array
