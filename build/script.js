@@ -133,9 +133,9 @@ let p = content.appendChild(div)
 
 let options = document.getElementById('options')
 
+let checkAnswerBtn = document.getElementById('checkAnswer')
 
-
-
+let score = []
 //function to show question based on counter
 
 /**
@@ -151,6 +151,8 @@ let showQuesion = () => {
 
   if(counter === data.length - 1){
     console.log('End of questions')
+    content.innerHTML = 'End of questions'
+    return;
   }
 
   
@@ -165,34 +167,55 @@ let showQuesion = () => {
        </div>
        
   `)
+
+   data[counter].incorrect.push(data[counter].correct)
    options.innerHTML = '';
     data[counter].incorrect.forEach(element => {
     let label = document.createElement('label')
     label.innerHTML = element + `<br />`
     let inputValue = document.createElement('input')
+    inputValue.value = element
     inputValue.setAttribute('type', 'radio')
     inputValue.setAttribute('name', 'options')
     options.appendChild(inputValue)
     options.appendChild(label)
+    //inputValue.addEventListener('click', checkAnswer)
   });
-  console.log(options)
-
-  options.addEventListener('click', checkAnswer)
+  let userOption = document.querySelector('input[name="options"]:checked').value
+    if(userOption != null && userOption == data[counter].correct){
+      console.log(userOption)
+    }
+  //checkAnswer.addEventListener('click', checkAnswer(data[counter].correct))
+  //console.log(options)
+  
+  //console.log(getValue)
+  //options.addEventListener('click', checkAnswer)
 
   
-  console.log(counter)
+  //console.log(counter)
   counter++
 }
+//console.log(options)
 
 btn.addEventListener('click', showQuesion)
 
-let checkAnswer = (opp) => {
+let checkAnswer = (data) => {
+  let userOption = document.querySelector('input[name="options"]:checked').value
+  if(userOption != null){
+    console.log(userOption)
 
-  let userAnswer = document.getElementsByName('options').values
-  console.log(userAnswer)
-  // if(userOption === correctOption) {
+  }
+  // let getValue = document.getElementsByName('options')
+  // getValue.forEach(value => {
+  //   console.log(value)
+  // })
+  // let userAnswer = document.querySelector('input[name="options"]:checked')
+  // //console.log(userAnswer)
+  // if(userAnswer === data[counter].correct) {
+  //   //console.log(`User answer = ${userAnswer}: ${data}`)
   //   return true
   // }
+  // //console.log(userAnswer)
   // return false
 }
 //could loop through options array to display
