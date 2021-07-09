@@ -168,11 +168,13 @@ let showQuesion = () => {
        </div>
        
   `)
-
-   data[counter].incorrect.push(data[counter].correct)
+   let questionOption = data[counter].incorrect
+   questionOption.push(data[counter].correct)
+   //Todo write native sort/shuffle function
+    let app = optionsShuffle(questionOption)
    ansArray.push(data[counter].correct)
    options.innerHTML = '';
-    data[counter].incorrect.forEach(element => {
+    app.forEach(element => {
     let newLine = document.createElement('br')
     let inputValue = document.createElement('input')
     element.toString()
@@ -188,20 +190,7 @@ let showQuesion = () => {
     options.appendChild(newLine)
     //inputValue.addEventListener('click', checkAnswer)
   });
-
-  //Code runs before the DOM loads
-  // let userOption = document.querySelector('input[name="options"]:checked').value
-  //   if(userOption != null && userOption == data[counter].correct){
-  //     console.log(userOption)
-  //   }
-  //checkAnswer.addEventListener('click', checkAnswer(data[counter].correct))
-  //console.log(options)
-  
-  //console.log(getValue)
-  //options.addEventListener('click', checkAnswer)
-
-  
-  //console.log(counter)
+  console.log(score)
   counter++
 }
 //console.log(options)
@@ -214,42 +203,35 @@ btn.addEventListener('click', showQuesion)
 //     }
 
 let checkAnswer = () => {
-  let food = 'beans'
+  let answerScore = 0
   let userOption = document.querySelector('input[name="options"]:checked').value
-  //userOption.toString() 
   console.log(userOption)
   console.log(ansArray)
   if(userOption != null){
     if(ansArray.includes(userOption)){
+      answerScore += 1
+      score.push(answerScore)
       console.log('correct answer')
       return
     }
+    answer = 0;
+    score.push(answerScore)
     console.log('inccorrect answer')
     return
   }
-  console.log(false, 'false')
-  // let getValue = document.getElementsByName('options')
-  // getValue.forEach(value => {
-  //   console.log(value)
-  // })
-  // let userAnswer = document.querySelector('input[name="options"]:checked')
-  // //console.log(userAnswer)
-  // if(userAnswer === data[counter].correct) {
-  //   //console.log(`User answer = ${userAnswer}: ${data}`)
-  //   return true
-  // }
-  // //console.log(userAnswer)
-  // return false
+  console.log(score)
+ 
 }
-//could loop through options array to display
 
-//selectedValue.addEventListener('click', checkAnswer)
-//write show question function: should have counter variable
-//next question should be nested inside show function
-//current question should be compared with array length
-//counter variable should be increased before end of function
-
-
+let optionsShuffle = (arr) => {
+  for(let i = arr.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * ( i + 1))
+    let t = arr[i]
+    arr[i] = arr[j]
+    arr[j] = t
+  }
+  return arr
+}
 
 // 1. Create the interval
 // 2. Create a counter variable
