@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="custom.css">
     <title>Tandem Trivia</title>
   </head>
   <body>
     <div class="flex items-center justify-center mt-16">
-      
       <div
         class="max-w-screen-lg overflow-hidden shadow-lg flex-auto rounded-lg"
       >
@@ -16,9 +16,13 @@
           class="bg-green-800 text-white border shadow-lg py-6"
           id="question-number"
         ></div>
-        <div id="content"></div>
+        <div class="question-body" id="q-body">
+        <div id="content" class="content"></div>
 
-        <div id="options"></div>
+        <div id="options">
+  
+        </div>
+       </div>
 
         <div>
           <input
@@ -34,11 +38,11 @@
               px-4
               rounded
             "
-            onclick="checkAnswer()"
+            onclick="checkAnswer(); this.onClick = null;"
           />
         </div>
 
-        <div class="flex justify-center mt-4 mb-4">
+        <!-- <div class="flex justify-center mt-4 mb-4">
             <input
               type="button"
               value="Start"
@@ -54,7 +58,7 @@
               "
               onclick="initialize()"
             />
-        </div>
+        </div> -->
 
         <div class="flex justify-center mt-4 mb-4" id="btn-id">
           <input

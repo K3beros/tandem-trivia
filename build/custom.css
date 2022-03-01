@@ -1,0 +1,20 @@
+input[name="options"]:checked {
+    box-shadow: 0 0 0 3px orange;
+  }
+
+  /* .content {
+      background-color: aqua;
+  } */
+
+  .radio {
+      color: red;
+  }
+
+  .input-correct {
+      color: green;
+      background-color: aqua;
+  }
+
+.question-body {
+    background-color: yellow;
+}

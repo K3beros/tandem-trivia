@@ -41,7 +41,6 @@ let data = [
       "incorrect": ["Lake Baikal", "Lake Michigan", "Lake Victoria"],
       "correct": "Lake Superior"
     },
-  
     {
       "question": "In a website address bar, what does WWW stand for?",
       "incorrect": ["Wild Wild West", "War World Web"],
@@ -135,8 +134,11 @@ let options = document.getElementById('options')
 
 let checkAnswerBtn = document.getElementById('checkAnswer')
 
+let questionBody = document.getElementById('q-body')
+
 let score = []
 let ansArray = []
+let correctAnswer = 0;
 //function to show question based on counter
 
 /**
@@ -150,13 +152,12 @@ let ansArray = []
 
 let showQuesion = () => {
 
-  if(counter === data.length - 1){
+  if(counter === data.length){
     console.log('End of questions')
-    content.innerHTML = 'End of questions'
+    questionBody.innerHTML = 'This is the end of the questions'
     return;
   }
 
-  
   questionNumber = counter
   questionNum.innerHTML = `<p class="flex justify-center font-bold" >Question Number ${questionNumber + 1} of ${data.length}</p>`
   content.innerHTML = ( `
@@ -166,7 +167,7 @@ let showQuesion = () => {
        <div class="ml-2">
        <p>${data[counter].question}?</p>
        </div>
-       
+
   `)
    let questionOption = data[counter].incorrect
    questionOption.push(data[counter].correct)
@@ -174,7 +175,7 @@ let showQuesion = () => {
     let app = optionsShuffle(questionOption)
    ansArray.push(data[counter].correct)
    options.innerHTML = '';
-    app.forEach(element => {
+    app.forEach((element,index) => {
     let newLine = document.createElement('br')
     let inputValue = document.createElement('input')
     element.toString()
@@ -182,9 +183,10 @@ let showQuesion = () => {
     inputValue.setAttribute('type', 'radio')
     inputValue.setAttribute('name', 'options')
     inputValue.setAttribute('class', 'radio1')
+    inputValue.setAttribute('id', `radio${index}`)
     let label = document.createElement('label')
     label.textContent = element 
-    label.setAttribute('for', 'radio1')
+    label.setAttribute('for', `radio${index}`)
     options.appendChild(inputValue)
     options.appendChild(label)
     options.appendChild(newLine)
@@ -209,8 +211,12 @@ let checkAnswer = () => {
   console.log(ansArray)
   if(userOption != null){
     if(ansArray.includes(userOption)){
-      answerScore += 1
+      correctAnswer += 1
       score.push(answerScore)
+      console.log(userOption)
+      console.log(correctAnswer);
+      let element = document.querySelector('input[name="options"]:checked')
+      console.log(element)
       console.log('correct answer')
       return
     }
@@ -238,7 +244,7 @@ let optionsShuffle = (arr) => {
 // 3. Use the counter to display items from the array
 // 4. Stop the interval when we've show all items
 
-function initialize () {
+//function initialize () {
   // startBtn.click()
   //startBtn.onclick = (e) => {
     //e.currentTarget.remove()
@@ -249,7 +255,7 @@ function initialize () {
 
   //showQuestions()
 
-}
+
 
 
 
@@ -287,7 +293,7 @@ function initialize () {
 // }
 
 //shuffleArray(data);
-initialize()
+//initialize()
 
 
 
