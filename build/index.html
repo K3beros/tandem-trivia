@@ -23,7 +23,9 @@
   
         </div>
        </div>
-
+       <div>
+         <p id="score">Score: </p>
+       </div>
         <div>
           <input
             type="button"
@@ -38,11 +40,10 @@
               px-4
               rounded
             "
-            onclick="checkAnswer(); this.onClick = null;"
           />
         </div>
 
-        <!-- <div class="flex justify-center mt-4 mb-4">
+        <div class="flex justify-center mt-4 mb-4">
             <input
               type="button"
               value="Start"
@@ -56,9 +57,9 @@
                 px-4
                 rounded
               "
-              onclick="initialize()"
+              onclick="startQuiz()"
             />
-        </div> -->
+        </div>
 
         <div class="flex justify-center mt-4 mb-4" id="btn-id">
           <input

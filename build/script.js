@@ -118,7 +118,7 @@ let questionNum = document.getElementById('question-number')
 let btn = document.getElementById('btn')
 
 let content = document.getElementById('content')
-const div = document.createElement('div')
+let div = document.createElement('div')
 
 let answer = document.getElementById('answer-id')
 
@@ -136,7 +136,9 @@ let checkAnswerBtn = document.getElementById('checkAnswer')
 
 let questionBody = document.getElementById('q-body')
 
-let score = []
+let userScore = document.getElementById('score')
+
+let score = 0
 let ansArray = []
 let correctAnswer = 0;
 //function to show question based on counter
@@ -147,62 +149,14 @@ let correctAnswer = 0;
  * and run a function to show question + 1
  */
 
- let counter = 0;
+/*
+  *function handle the quiz data
+  *
+*/
 
 
-let showQuesion = () => {
-
-  if(counter === data.length){
-    console.log('End of questions')
-    questionBody.innerHTML = 'This is the end of the questions'
-    return;
-  }
-
-  questionNumber = counter
-  questionNum.innerHTML = `<p class="flex justify-center font-bold" >Question Number ${questionNumber + 1} of ${data.length}</p>`
-  content.innerHTML = ( `
-       <div>
-
-       </div>
-       <div class="ml-2">
-       <p>${data[counter].question}?</p>
-       </div>
-
-  `)
-   let questionOption = data[counter].incorrect
-   questionOption.push(data[counter].correct)
-   //Todo write native sort/shuffle function
-    let app = optionsShuffle(questionOption)
-   ansArray.push(data[counter].correct)
-   options.innerHTML = '';
-    app.forEach((element,index) => {
-    let newLine = document.createElement('br')
-    let inputValue = document.createElement('input')
-    element.toString()
-    inputValue.value = element
-    inputValue.setAttribute('type', 'radio')
-    inputValue.setAttribute('name', 'options')
-    inputValue.setAttribute('class', 'radio1')
-    inputValue.setAttribute('id', `radio${index}`)
-    let label = document.createElement('label')
-    label.textContent = element 
-    label.setAttribute('for', `radio${index}`)
-    options.appendChild(inputValue)
-    options.appendChild(label)
-    options.appendChild(newLine)
-    //inputValue.addEventListener('click', checkAnswer)
-  });
-  console.log(score)
-  counter++
-}
-//console.log(options)
-
-btn.addEventListener('click', showQuesion)
 
 
-//     if(userOption != null){
-//       console.log(userOption)
-//     }
 
 let checkAnswer = () => {
   let answerScore = 0
@@ -244,33 +198,6 @@ let optionsShuffle = (arr) => {
 // 3. Use the counter to display items from the array
 // 4. Stop the interval when we've show all items
 
-//function initialize () {
-  // startBtn.click()
-  //startBtn.onclick = (e) => {
-    //e.currentTarget.remove()
-    showQuesion()
-    //btn.addEventListener('click', nextButton())
-    //console.log(e)
-  
-
-  //showQuestions()
-
-
-
-
-
-// let btnClick = (e) => {
-//   //e.currentTarget.remove()
-//   alert('btn clicked')
-//   console.log('clicked')
-//   console.log(e.currentTarget)
-// }
-
-
-
-
-
-
 
 
 
@@ -295,5 +222,73 @@ let optionsShuffle = (arr) => {
 //shuffleArray(data);
 //initialize()
 
+//try figuring out checking the options answer through callback
+function generateQuiz(quest, someData, questOptions) {
 
+  let counter = 0;
+  if(counter === someData.length){
+    console.log('End of questions')
+    quest.innerHTML = 'This is the end of the questions'
+    return;
+  }
+
+  questionNumber = counter
+  questionNum.innerHTML = `<p class="flex justify-center font-bold" >Question Number ${questionNumber + 1} of ${someData.length}</p>`
+  content.innerHTML = ( `
+       <div>
+
+       </div>
+       <div class="ml-2">
+       <p>${someData[counter].question}?</p>
+       </div>
+
+  `)
+  let questionOption = someData[counter].incorrect
+  questionOption.push(someData[counter].correct)
+  //Todo write native sort/shuffle function
+  let app = optionsShuffle(questionOption)
+  ansArray.push(someData[counter].correct)
+  // options.innerHTML = '';
+  app.forEach((element,index) => {
+    let newLine = document.createElement('br')
+    let inputValue = document.createElement('input')
+    element.toString()
+    inputValue.value = element
+    inputValue.setAttribute('type', 'radio')
+    inputValue.setAttribute('name', 'options')
+    inputValue.setAttribute('class', 'radio1')
+    inputValue.setAttribute('id', `radio${index}`)
+    let label = document.createElement('label')
+    label.textContent = element
+    label.setAttribute('for', `radio${index}`)
+    questOptions.appendChild(inputValue)
+    questOptions.appendChild(label)
+    questOptions.appendChild(newLine)
+  });
+  checkAnswerBtn.onclick = () => {
+    let selectedOption = document.querySelector('input[type=radio][name=options]:checked')
+    console.log(selectedOption.value)
+    if(selectedOption.value === someData[counter].correct) {
+       console.log(selectedOption.value +': correct answer')
+       score++
+       userScore.innerHTML = score
+    }
+    console.log(selectedOption.value + ': Try again!')
+  }
+  console.log(score)
+  counter++
+}
+
+function startQuiz() {
+
+  generateQuiz(questionBody, data, options)
+}
+
+
+btn.addEventListener('click', generateQuiz)
+
+// function checkAnswer(userAnswer, correctAnswer) {
+
+
+// }
 
